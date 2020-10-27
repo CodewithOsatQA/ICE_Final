@@ -9,8 +9,8 @@ public class TrackDTO {
 
     private long id;
     private String name;
-//    private Album album;
-//    private Playlist playlist;
+    private Album album;
+    private Playlist playlist;
     private int duration;
     private String lyrics;
 
@@ -35,21 +35,21 @@ public class TrackDTO {
         this.name = name;
     }
 
-//    public Album getAlbum() {
-//        return album;
-//    }
-//
-//    public void setAlbum(Album album) {
-//        this.album = album;
-//    }
-//
-//    public Playlist getPlaylist() {
-//        return playlist;
-//    }
-//
-//    public void setPlaylist(Playlist playlist) {
-//        this.playlist = playlist;
-//    }
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Playlist getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
+    }
 
     public int getDuration() {
         return duration;
@@ -75,14 +75,14 @@ public class TrackDTO {
         return id == trackDTO.id &&
                 duration == trackDTO.duration &&
                 name.equals(trackDTO.name) &&
-//                album.equals(trackDTO.album) &&
-//                playlist.equals(trackDTO.playlist) &&
+               album.equals(trackDTO.album) &&
+                playlist.equals(trackDTO.playlist) &&
                 lyrics.equals(trackDTO.lyrics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name,/* album, playlist,*/ duration, lyrics);
+        return Objects.hash(id, name, album, playlist,duration, lyrics);
     }
 
     @Override
@@ -90,8 +90,8 @@ public class TrackDTO {
         return "TrackDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                /*", album=" + album +
-                ", playlist=" + playlist +*/
+                ", album=" + album +
+                ", playlist=" + playlist +
                 ", duration=" + duration +
                 ", lyrics='" + lyrics + '\'' +
                 '}';

@@ -1,5 +1,7 @@
 package com.qa.choonz.persistence.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -31,6 +33,7 @@ public class Genre {
     private String description;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("genre")
     private List<Album> albums;
 
     public Genre() {

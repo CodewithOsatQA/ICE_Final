@@ -1,5 +1,7 @@
 package com.qa.choonz.persistence.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class Artist {
     private String name;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("artist")
     private List<Album> albums;
 
     public Artist() {

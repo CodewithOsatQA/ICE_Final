@@ -1,5 +1,7 @@
 package com.qa.choonz.persistence.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -24,9 +26,11 @@ public class Track {
     private String name;
 
     @ManyToOne
+    @JsonIgnoreProperties("tracks")
     private Album album;
 
     @ManyToOne
+    @JsonIgnoreProperties("tracks")
     private Playlist playlist;
 
     // in seconds

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.qa.choonz.exception.TrackNotFoundException;
 import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.persistence.repository.TrackRepository;
+import com.qa.choonz.rest.dto.AlbumDTO;
 import com.qa.choonz.rest.dto.TrackDTO;
+import com.qa.choonz.utils.SAPIBeanUtils;
 
 @Service
 public class TrackService {
@@ -40,16 +42,14 @@ public class TrackService {
         Track found = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
         return this.mapToDTO(found);
     }
+    public List<TrackDTO> readAlbum(Long id) {
+    	return this.repo.readAlbum(id).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
 
-    public TrackDTO update(Track track, long id) {
+    public TrackDTO update(TrackDTO track, long id) {
         Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-        toUpdate.setName(track.getName());
-        toUpdate.setAlbum(track.getAlbum());
-        toUpdate.setDuration(track.getDuration());
-        toUpdate.setLyrics(track.getLyrics());
-        toUpdate.setPlaylist(track.getPlaylist());
-        Track updated = this.repo.save(toUpdate);
-        return this.mapToDTO(updated);
+        SAPIBeanUtils.mergeNotNull(track,toUpdate);
+        return this.mapToDTO(this.repo.save(toUpdate));
     }
 
     public boolean delete(long id) {

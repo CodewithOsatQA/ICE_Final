@@ -1,6 +1,10 @@
 package com.qa.choonz.persistence.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,8 +32,11 @@ public class Artist {
     private String name;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+
     @JsonIgnoreProperties("artist")
-    private List<Album> albums;
+
+    private List<Album> albums= new ArrayList<>();
+
 
     public Artist() {
         super();
@@ -41,6 +48,11 @@ public class Artist {
         this.id = id;
         this.name = name;
         this.albums = albums;
+    }
+    public Artist(long id, @NotNull @Size(max = 100) String name) {
+        super();
+        this.id = id;
+        this.name = name;
     }
 
     public long getId() {
@@ -65,14 +77,6 @@ public class Artist {
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Artist [id=").append(id).append(", name=").append(name).append(", albums=").append(albums)
-                .append("]");
-        return builder.toString();
     }
 
     @Override

@@ -1,6 +1,10 @@
 package com.qa.choonz.persistence.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,14 +31,17 @@ public class Genre {
     @Column(unique = true)
     private String name;
 
-    @NotNull
+	@NotNull
     @Size(max = 250)
     @Column(unique = true)
     private String description;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+
     @JsonIgnoreProperties("genre")
-    private List<Album> albums;
+
+    private List<Album> albums= new ArrayList<>();
+
 
     public Genre() {
         super();
@@ -49,14 +56,37 @@ public class Genre {
         this.description = description;
         this.albums = albums;
     }
+    public long getId() {
+		return id;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Genre [id=").append(id).append(", name=").append(name).append(", description=")
-                .append(description).append(", albums=").append(albums).append("]");
-        return builder.toString();
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Album> getAlbums() {
+		return albums;
+	}
+
+	public void setAlbums(List<Album> albums) {
+		this.albums = albums;
+	}
 
     @Override
     public int hashCode() {
